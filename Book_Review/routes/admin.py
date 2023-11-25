@@ -1,3 +1,9 @@
+"""
+Module for admin-related routes and functionalities.
+
+This module includes routes for managing users, moderating reviews, and moderating comments.
+"""
+
 from flask import Blueprint, jsonify
 from flask_principal import Permission
 from flask_login import login_required, current_user
@@ -13,6 +19,20 @@ admin_permission = Permission(principals.RoleNeed('admin'))
 @login_required
 @admin_permission.require(http_exception=403)
 def manage_users():
+    """
+    Endpoint for administrators to retrieve a list of all users and their roles.
+
+    Method:
+        GET
+
+    Request Headers:
+        Authorization: Bearer <access_token>
+
+    Returns:
+        json: A JSON object containing user data, including usernames and roles.
+    """
+
+
     if current_user.role != 'admin':
         return jsonify({'error': 'Unauthorized to access this resource'}), 403
 
@@ -24,6 +44,20 @@ def manage_users():
 @login_required
 @admin_permission.require(http_exception=403)
 def moderate_reviews():
+    """
+    Endpoint for administrators to retrieve a list of all book reviews with user details.
+
+    Method:
+        GET
+
+    Request Headers:
+        Authorization: Bearer <access_token>
+
+    Returns:
+        json: A JSON object containing review data, including usernames, book titles, ratings, and review text.
+    """
+
+    
     if current_user.role != 'admin':
         return jsonify({'error': 'Unauthorized to access this resource'}), 403
 
@@ -35,6 +69,20 @@ def moderate_reviews():
 @login_required
 @admin_permission.require(http_exception=403)
 def moderate_comments():
+    """
+    Endpoint for administrators to retrieve a list of all comments on book reviews.
+
+    Method:
+        GET
+
+    Request Headers:
+        Authorization: Bearer <access_token>
+
+    Returns:
+        json: A JSON object containing comment data, including usernames, review IDs, and comment text.
+    """
+
+    
     if current_user.role != 'admin':
         return jsonify({'error': 'Unauthorized to access this resource'}), 403
 

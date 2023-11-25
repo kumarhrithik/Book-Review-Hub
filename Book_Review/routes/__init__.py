@@ -1,3 +1,9 @@
+"""
+Package for organizing route blueprints.
+
+This package includes blueprints for tasks, authentication, admin functionalities, and book-related operations.
+"""
+
 from flask import Blueprint
 
 tasks = Blueprint('tasks', __name__)
